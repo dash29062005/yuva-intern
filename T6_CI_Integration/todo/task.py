@@ -15,8 +15,8 @@ class Task:
         """
         self.id = task_id
 
-        validate_title(title)
-        self.title = title
+        # ✅ apply validated & sanitized value
+        self.title = validate_title(title)
 
         self.priority = priority.lower() if isinstance(priority, str) else priority
         self.status = status.lower() if isinstance(status, str) else status
@@ -68,8 +68,8 @@ class Task:
             raise ValueError("Completed tasks cannot be modified.")
 
         if title is not None:
-            validate_title(title)
-            self.title = title
+            # ✅ apply validated & sanitized value
+            self.title = validate_title(title)
 
         if priority is not None:
             self.priority = priority.lower()
