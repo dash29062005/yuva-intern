@@ -1,96 +1,74 @@
 # CLI To-Do Task Manager
+
+![CI](https://github.com/<your-username>/<repo-name>/actions/workflows/ci.yml/badge.svg)
+
 ## Overview
-This project demonstrates security auditing and hardening of a Python CLI-based To-Do application. An existing implementation was reviewed to identify potential security weaknesses, followed by targeted fixes to improve robustness while preserving functionality and test coverage.
+This project demonstrates the integration of a Continuous Integration (CI) pipeline for a Python CLI-based To-Do application. The objective is to automate code quality checks by running linting and tests on every code change, simulating a professional development workflow.
 
 ---
 
 ## Project Structure
 ```text
-T5_Security/
+Week6_CI_Integration/
 ├── todo/               # Application source code
-├── security/           # Security utilities and hardening modules
+├── security/           # Security utilities (from previous tasks)
 ├── tests/              # Unit and integration tests
-├── reports/            # Security audit and validation reports
+├── reports/
+│   └── ci_report.md    # CI pipeline documentation
+├── .github/
+│   └── workflows/
+│       └── ci.yml      # GitHub Actions CI configuration
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+└── .flake8
 ```
 
 ---
 
-## Security Review Approach
-A structured security review was conducted focusing on:
-- User input handling and sanitization
-- Error reporting and information disclosure
-- Persistent storage integrity
-- Fault tolerance against malformed or tampered data
-
-**Scope:** Local, non-networked Python CLI application.
+## CI Tool Used
+GitHub Actions was selected due to its seamless GitHub integration and widespread industry use for Python projects.
 
 ---
 
-## Identified Security Risks
-- Unbounded user input leading to potential denial-of-service
-- Control character injection in task titles
-- Exposure of internal error details via CLI output
-- Unsafe deserialization of corrupted storage files
-- Partial storage corruption causing application failure
-- Plaintext local data storage
-- Lack of authorization controls in a shared environment
+## CI Pipeline Overview
+The CI pipeline is defined in `.github/workflows/ci.yml` and performs the following steps automatically:
+- Checks out the repository code
+- Sets up Python 3.10
+- Installs project dependencies
+- Runs static code analysis using `flake8`
+- Executes the full test suite using `pytest`
 
-All risks are documented in detail in the security audit report.
-
----
-
-## Security Enhancements Applied
-- Centralized input validation and sanitization
-- Secure error handling with internal logging
-- Safe deserialization and schema validation for stored data
-- Fault-tolerant handling of partially corrupted storage
-- Improved storage integrity without altering business logic
-
-Security-related logic is isolated from core application logic to improve maintainability and auditability.
+The pipeline is configured to fail immediately if linting or tests do not pass.
 
 ---
 
-## Security Testing and Validation
-The following test scenarios were executed to validate the implemented security controls:
+## Trigger Conditions
+The CI workflow runs automatically on:
+- Every push to the `main` branch
+- Every pull request targeting the `main` branch
 
-### 1. Run full automated test suite
+This ensures continuous validation of all code changes.
+
+---
+
+## Running CI Checks Locally
+To replicate the CI steps on a local machine:
+
 ```bash
+pip install -r requirements.txt
+flake8 .
 pytest
 ```
 
-### 2. Reject empty task titles
-```bash
-python todo/main.py add ""
+---
+
+## Documentation
+Detailed information about the CI setup, configuration, and verification process is available in:
+```
+reports/ci_report.md
 ```
 
-### 3. Reject oversized input (denial-of-service prevention)
-```bash
-python todo/main.py add "$(python -c 'print("A"*1000)')"
-```
+---
 
-### 4. Prevent invalid priority values
-```bash
-python todo/main.py add "Test task" --priority urgent
-```
-
-### 5. Handle corrupted storage safely
-```bash
-echo "{ invalid json }" > todo/tasks.json
-python todo/main.py list
-```
-
-### 6. Prevent modification of completed tasks
-```bash
-python todo/main.py complete 1
-python todo/main.py update 1 --title "New title"
-```
-
-### 7. Verify persistence integrity across reloads
-```bash
-python todo/main.py add "Persistent task"
-python todo/main.py list
-```
-
-Detailed security testing results are documented in `reports/testing_and_validation.md`.
+## Conclusion
+By integrating a CI pipeline, the project now enforces automated quality checks for every code change. This improves reliability, reduces manual testing effort, and demonstrates a professional approach to maintaining code quality through automation.
