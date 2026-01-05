@@ -3,7 +3,7 @@
 ![CI](https://github.com/dash29062005/yuva-intern/actions/workflows/ci.yml/badge.svg)
 
 ## Overview
-This project demonstrates the integration of a Continuous Integration (CI) pipeline for a Python CLI-based To-Do application as part of **Task 6**. The objective is to automate code quality checks by running linting and tests on relevant code changes, simulating a professional development workflow.
+This project demonstrates the integration of a Continuous Integration (CI) pipeline for a Python CLI-based To-Do application as part of **Task 6**. The objective is to automate code quality checks by running linting and tests on relevant code changes, simulating a professional development workflow used in real-world software projects.
 
 ---
 
@@ -21,13 +21,13 @@ T6_CI_Integration/
 ```
 
 **Note:**  
-The CI workflow configuration is located at the repository root under  
+The CI workflow configuration file (`ci.yml`) is located at the repository root under  
 `.github/workflows/ci.yml`, as required by GitHub Actions.
 
 ---
 
 ## CI Tool Used
-GitHub Actions was selected due to its seamless GitHub integration and widespread industry adoption for Python projects.
+GitHub Actions was selected due to its seamless integration with GitHub and its widespread adoption in professional Python development workflows.
 
 ---
 
@@ -37,25 +37,43 @@ The CI pipeline is defined in `.github/workflows/ci.yml` and performs the follow
 - Sets up Python 3.10
 - Installs project dependencies
 - Runs static code analysis using `flake8`
-- Executes the full test suite using `pytest`
+- Executes the complete test suite using `pytest`
 
-The pipeline is configured to fail immediately if linting or tests do not pass.
+The pipeline is configured to fail immediately if linting or tests do not pass, ensuring strict quality enforcement.
+
+---
+
+## CI Workflow Configuration (Summary)
+```yaml
+name: Python CI (Task 6)
+
+on:
+  push:
+    paths:
+      - "T6_CI_Integration/**"
+  pull_request:
+    paths:
+      - "T6_CI_Integration/**"
+```
+
+This configuration ensures that CI runs only when Task 6 files are modified, which is appropriate for a multi-task internship repository.
 
 ---
 
 ## Trigger Conditions
-The CI workflow is scoped specifically to **Task 6** and runs automatically when:
+The CI workflow runs automatically when:
 - A push modifies files under `T6_CI_Integration/`
 - A pull request modifies files under `T6_CI_Integration/`
 
-This ensures CI validation applies only to Task 6 within a multi-task internship repository.
+This scoped triggering prevents unnecessary CI runs for unrelated internship tasks.
 
 ---
 
-## Running CI Checks Locally
-To replicate the CI steps on a local machine:
+## CI Execution Commands
+The following commands are executed automatically by the CI pipeline and can also be run locally to reproduce the same checks:
 
 ```bash
+cd T6_CI_Integration
 pip install -r requirements.txt
 flake8 .
 pytest
@@ -64,7 +82,7 @@ pytest
 ---
 
 ## Documentation
-Detailed information about the CI setup, configuration, and verification process is available in:
+Detailed information about the CI setup, configuration decisions, and validation process is available in:
 ```
 reports/ci_report.md
 ```
@@ -72,11 +90,4 @@ reports/ci_report.md
 ---
 
 ## Conclusion
-By integrating a scoped CI pipeline, the project enforces automated quality checks for Task 6 without affecting other internship tasks. This improves reliability, reduces manual testing effort, and demonstrates a professional approach to maintaining code quality through automation.
-
-
-
-
-
-
-
+By integrating a scoped Continuous Integration pipeline, this project enforces automated linting and testing for Task 6 without affecting other internship tasks. The CI setup improves code reliability, reduces manual verification effort, and demonstrates a professional approach to maintaining code quality through automation.
