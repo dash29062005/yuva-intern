@@ -1,0 +1,14 @@
+[flake8]
+max-line-length = 100
+exclude =
+    .git,
+    __pycache__,
+    .github,
+    T6_CI_Integration/tests,
+    T6_CI_Integration/security,
+    T6_CI_Integration/todo/__init__.py
+ignore =
+    E302,
+    E303,
+    F401,
+    F841
