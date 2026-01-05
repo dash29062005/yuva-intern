@@ -1,2 +1,2 @@
-self.title = title
-validate_title(self.title)
+from .task import Task
+from .task_manager import TaskManager
