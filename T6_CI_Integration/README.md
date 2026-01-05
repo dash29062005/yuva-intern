@@ -74,3 +74,5 @@ reports/ci_report.md
 ## Conclusion
 By integrating a CI pipeline, the project now enforces automated quality checks for every code change. This improves reliability, reduces manual testing effort, and demonstrates a professional approach to maintaining code quality through automation.
 
+CI trigger
+
