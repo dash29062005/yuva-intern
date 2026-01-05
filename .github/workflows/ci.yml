@@ -1,12 +1,12 @@
-name: Python CI 
+name: Python CI (Task 6)
 
 on:
   push:
     paths:
-      - "Task6_CI_Integration/**"
+      - "T6_CI_Integration/**"
   pull_request:
     paths:
-      - "Task6_CI_Integration/**"
+      - "T6_CI_Integration/**"
 
 jobs:
   build-and-test:
@@ -23,16 +23,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd Task6_CI
+          cd T6_CI_Integration
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run linting
         run: |
-          cd Task6_CI
+          cd T6_CI_Integration
           flake8 .
 
       - name: Run tests
         run: |
-          cd Task6_CI
+          cd T6_CI_Integration
           pytest
