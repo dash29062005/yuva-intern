@@ -1,4 +1,4 @@
-# CLI To-Do Task Manager – CI Integration (Task 6)
+# CLI To-Do Task Manager – CI Integration 
 
 ![CI](https://github.com/dash29062005/yuva-intern/actions/workflows/ci.yml/badge.svg)
 
@@ -73,6 +73,7 @@ reports/ci_report.md
 
 ## Conclusion
 By integrating a scoped CI pipeline, the project enforces automated quality checks for Task 6 without affecting other internship tasks. This improves reliability, reduces manual testing effort, and demonstrates a professional approach to maintaining code quality through automation.
+
 
 
 
